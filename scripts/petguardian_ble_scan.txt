@@ -1,0 +1,58 @@
+import asyncio
+from collections import deque
+from bleak import BleakScanner
+
+TARGET_NAME = "BCPro_217898"
+WINDOW_SIZE = 10
+
+readings = deque(maxlen=WINDOW_SIZE)
+
+
+def get_status(avg_rssi):
+    if avg_rssi >= -62:
+        return "Very Near"
+    elif avg_rssi >= -76:
+        return "Near"
+    elif avg_rssi >= -86:
+        return "Far"
+    else:
+        return "Very Far / Weak"
+
+
+def advertisement_received(device, advertisement_data):
+    name = advertisement_data.local_name or device.name
+
+    if name == TARGET_NAME:
+        rssi = advertisement_data.rssi
+        readings.append(rssi)
+
+        avg_rssi = sum(readings) / len(readings)
+        status = get_status(avg_rssi)
+
+        print(
+            f"RSSI: {rssi:4d} dBm | "
+            f"Average: {avg_rssi:6.1f} dBm | "
+            f"Status: {status}"
+        )
+
+
+async def main():
+    scanner = BleakScanner(advertisement_received)
+
+    print(f"Scanning for {TARGET_NAME}...")
+    print(f"Using a {WINDOW_SIZE}-reading moving average")
+    print("Press Ctrl+C to stop.\n")
+
+    await scanner.start()
+
+    try:
+        await asyncio.Event().wait()
+    finally:
+        await scanner.stop()
+
+
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\nScanner stopped.")
