@@ -1,0 +1,1704 @@
+[
+    {
+        "id": "2974eb99fd21bb30",
+        "type": "tab",
+        "label": "Pet Environment",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "71a45e6f0d8ad017",
+        "type": "tab",
+        "label": "BLE Tracker",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e82eb2ac81e01e5e",
+        "type": "tab",
+        "label": "Camera",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d511ed243f196bad",
+        "type": "tab",
+        "label": "Pet Detection",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ae801eedb6f1ce65",
+        "type": "tab",
+        "label": "Pet Database",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f5d87f5536c450d1",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "dcebaff1ccb83dc6",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#fcfcfd",
+            "primary": "#0d74ce",
+            "bgPage": "#f9f9fb",
+            "groupBg": "#ffffff",
+            "groupOutline": "#d9d9e0"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "ed76bf5242628501",
+        "type": "ui-page",
+        "name": "Pet Guardian",
+        "ui": "f5d87f5536c450d1",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "dcebaff1ccb83dc6",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "tabs": [],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "b44316093f905af6",
+        "type": "ui-group",
+        "name": "Pet Environment",
+        "page": "ed76bf5242628501",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "tab": ""
+    },
+    {
+        "id": "b1570f723a86a3a1",
+        "type": "ui-group",
+        "name": "Pet Proximity",
+        "page": "ed76bf5242628501",
+        "width": 6,
+        "height": 1,
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "tab": ""
+    },
+    {
+        "id": "7be2d9effcad6721",
+        "type": "ui-group",
+        "name": "Live Check-In",
+        "page": "ed76bf5242628501",
+        "width": "12",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "tab": ""
+    },
+    {
+        "id": "fb023e89b0d8c979",
+        "type": "sqlitedb",
+        "db": "/home/broketoof/petguardian.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "8320ba2030785547",
+        "type": "inject",
+        "z": "2974eb99fd21bb30",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 340,
+        "wires": [
+            [
+                "2c1f9f11baa0398e"
+            ]
+        ]
+    },
+    {
+        "id": "2c1f9f11baa0398e",
+        "type": "Bme280",
+        "z": "2974eb99fd21bb30",
+        "name": "Living Room BME280",
+        "bus": "1",
+        "address": "0x77",
+        "topic": "pet/environment",
+        "extra": true,
+        "preasure": 1013.25,
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "709b610a7dec5fd6",
+                "45c1082df11581f0",
+                "877ff6b0e32d6ce1"
+            ]
+        ]
+    },
+    {
+        "id": "877ff6b0e32d6ce1",
+        "type": "debug",
+        "z": "2974eb99fd21bb30",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "709b610a7dec5fd6",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.temperature_F, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 600,
+        "wires": [
+            [
+                "607e0d3ee4b10c99",
+                "d595d123f005c66d"
+            ]
+        ]
+    },
+    {
+        "id": "45c1082df11581f0",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload.humidity, 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 180,
+        "y": 680,
+        "wires": [
+            [
+                "d631c57e46cb5f19",
+                "898b36fb5b344462"
+            ]
+        ]
+    },
+    {
+        "id": "607e0d3ee4b10c99",
+        "type": "ui-gauge",
+        "z": "2974eb99fd21bb30",
+        "name": "Temperature",
+        "group": "b44316093f905af6",
+        "order": 1,
+        "value": "payload",
+        "valueType": "jsonata",
+        "width": "4",
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "F",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "40",
+                "color": "#d65c6e",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "50",
+                "color": "#ffae00",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "60",
+                "color": "#6cea53",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "75",
+                "color": "#eab253",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "85",
+                "color": "#ea535a",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "40",
+        "max": "110",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 550,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d631c57e46cb5f19",
+        "type": "ui-gauge",
+        "z": "2974eb99fd21bb30",
+        "name": "Humidity",
+        "group": "b44316093f905af6",
+        "order": 3,
+        "value": "payload",
+        "valueType": "jsonata",
+        "width": "4",
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Humidity",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#f20707",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "30",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "40",
+                "color": "#53ea55",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "60",
+                "color": "#e7a20d",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "70",
+                "color": "#e3380d",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 540,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "898b36fb5b344462",
+        "type": "switch",
+        "z": "2974eb99fd21bb30",
+        "name": "Test Humidity",
+        "property": "payload",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "30",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "40",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "60",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "70",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 5,
+        "x": 180,
+        "y": 780,
+        "wires": [
+            [
+                "d38d503cd43bd943"
+            ],
+            [
+                "9469047e3dcac9f5"
+            ],
+            [
+                "63af6392d11ae203"
+            ],
+            [
+                "0fc1744159e338c4"
+            ],
+            [
+                "1f68ad14d4d059db"
+            ]
+        ]
+    },
+    {
+        "id": "d38d503cd43bd943",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "OutPut1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Very Dry",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 640,
+        "wires": [
+            [
+                "0cf8018d2e1b504a"
+            ]
+        ]
+    },
+    {
+        "id": "9469047e3dcac9f5",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Dry",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 700,
+        "wires": [
+            [
+                "0cf8018d2e1b504a"
+            ]
+        ]
+    },
+    {
+        "id": "63af6392d11ae203",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Comfortable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 760,
+        "wires": [
+            [
+                "0cf8018d2e1b504a"
+            ]
+        ]
+    },
+    {
+        "id": "0fc1744159e338c4",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "High Humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 820,
+        "wires": [
+            [
+                "0cf8018d2e1b504a"
+            ]
+        ]
+    },
+    {
+        "id": "1f68ad14d4d059db",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Very High Humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 880,
+        "wires": [
+            [
+                "0cf8018d2e1b504a"
+            ]
+        ]
+    },
+    {
+        "id": "0cf8018d2e1b504a",
+        "type": "ui-text",
+        "z": "2974eb99fd21bb30",
+        "group": "b44316093f905af6",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Humidity Status",
+        "label": "Status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "jsonata",
+        "x": 720,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d595d123f005c66d",
+        "type": "switch",
+        "z": "2974eb99fd21bb30",
+        "name": "Test Temperature",
+        "property": "payload",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "50",
+                "vt": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "51",
+                "vt": "num",
+                "v2": "60",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "61",
+                "vt": "num",
+                "v2": "75",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "76",
+                "vt": "num",
+                "v2": "85",
+                "v2t": "num"
+            },
+            {
+                "t": "gte",
+                "v": "86",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 5,
+        "x": 190,
+        "y": 1080,
+        "wires": [
+            [
+                "1502f02be029cdc6"
+            ],
+            [
+                "cd2fe7a7466c44d9"
+            ],
+            [
+                "f5f4a0dc8212995b"
+            ],
+            [
+                "dff1670e4c8b5279"
+            ],
+            [
+                "f46bbbad764b6f75"
+            ]
+        ]
+    },
+    {
+        "id": "1502f02be029cdc6",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Too Cold",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 960,
+        "wires": [
+            [
+                "26abdee721667d1d"
+            ]
+        ]
+    },
+    {
+        "id": "cd2fe7a7466c44d9",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Cool",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1020,
+        "wires": [
+            [
+                "26abdee721667d1d"
+            ]
+        ]
+    },
+    {
+        "id": "f5f4a0dc8212995b",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output 3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Comfortable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1080,
+        "wires": [
+            [
+                "26abdee721667d1d"
+            ]
+        ]
+    },
+    {
+        "id": "dff1670e4c8b5279",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output 4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Warm",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1140,
+        "wires": [
+            [
+                "26abdee721667d1d"
+            ]
+        ]
+    },
+    {
+        "id": "f46bbbad764b6f75",
+        "type": "change",
+        "z": "2974eb99fd21bb30",
+        "name": "Output 5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Hot",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1200,
+        "wires": [
+            [
+                "26abdee721667d1d"
+            ]
+        ]
+    },
+    {
+        "id": "26abdee721667d1d",
+        "type": "ui-text",
+        "z": "2974eb99fd21bb30",
+        "group": "b44316093f905af6",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Temperature Status",
+        "label": "Status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "jsonata",
+        "x": 710,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "44504cba32ecc9e4",
+        "type": "inject",
+        "z": "71a45e6f0d8ad017",
+        "name": "Start BLE Scanner",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "4",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 260,
+        "wires": [
+            [
+                "ec0a88218101f628"
+            ]
+        ]
+    },
+    {
+        "id": "ec0a88218101f628",
+        "type": "exec",
+        "z": "71a45e6f0d8ad017",
+        "command": "/home/broketoof/petguardian-ble/bin/python /home/broketoof/petguardian_ble_nodered.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "BLE Scanner",
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "feaf34cbce5f1ca2"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d8df92e29b67fff3",
+        "type": "json",
+        "z": "71a45e6f0d8ad017",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "4de1445d5f0913fd",
+                "b88f9c86a1f56c6b",
+                "7cec3ad2ca1ec363"
+            ]
+        ]
+    },
+    {
+        "id": "4de1445d5f0913fd",
+        "type": "change",
+        "z": "71a45e6f0d8ad017",
+        "name": "Average RSSI",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.average_rssi",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 540,
+        "wires": [
+            [
+                "9ae637506efe6049"
+            ]
+        ]
+    },
+    {
+        "id": "b88f9c86a1f56c6b",
+        "type": "change",
+        "z": "71a45e6f0d8ad017",
+        "name": "Proximity Status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.status",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 580,
+        "wires": [
+            [
+                "43762e729bb0770a"
+            ]
+        ]
+    },
+    {
+        "id": "9ae637506efe6049",
+        "type": "ui-gauge",
+        "z": "71a45e6f0d8ad017",
+        "name": "Signal Strength",
+        "group": "b1570f723a86a3a1",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Signal Strength",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "dBm",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-100",
+                "color": "#f72c08",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "-86",
+                "color": "#dc8118",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "-76",
+                "color": "#41de21",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "-30",
+                "color": "#188f00",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-100",
+        "max": "-30",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 760,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43762e729bb0770a",
+        "type": "ui-text",
+        "z": "71a45e6f0d8ad017",
+        "group": "b1570f723a86a3a1",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Status",
+        "label": "Status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 770,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "7cec3ad2ca1ec363",
+        "type": "debug",
+        "z": "71a45e6f0d8ad017",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ee3449f194cf2b85",
+        "type": "inject",
+        "z": "71a45e6f0d8ad017",
+        "name": "Stop BLE Scanner",
+        "props": [
+            {
+                "p": "kill",
+                "v": "SIGTERM",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 230,
+        "y": 420,
+        "wires": [
+            [
+                "ec0a88218101f628"
+            ]
+        ]
+    },
+    {
+        "id": "feaf34cbce5f1ca2",
+        "type": "function",
+        "z": "71a45e6f0d8ad017",
+        "name": "Buffer BLE JSON",
+        "func": "let buffer = context.get(\"buffer\") || \"\";\n\nbuffer += msg.payload.toString();\n\nlet lines = buffer.split(/\\r?\\n/);\n\n// Keep any incomplete final line for the next chunk\ncontext.set(\"buffer\", lines.pop());\n\nlet messages = [];\n\nfor (let line of lines) {\n    line = line.trim();\n\n    if (line.length > 0) {\n        messages.push({\n            payload: line\n        });\n    }\n}\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 240,
+        "wires": [
+            [
+                "d8df92e29b67fff3"
+            ]
+        ]
+    },
+    {
+        "id": "39446af5ff1bd316",
+        "type": "ui-template",
+        "z": "e82eb2ac81e01e5e",
+        "group": "7be2d9effcad6721",
+        "page": "",
+        "ui": "",
+        "name": "Live Check-In",
+        "order": 4,
+        "width": "12",
+        "height": "8",
+        "head": "",
+        "format": "<div style=\"text-align:center;\">\n    <img\n        src=\"http://192.168.1.115:8000/stream.mjpg\"\n        style=\"\n            width:100%;\n            height:440px;\n            object-fit:cover;\n            border-radius:10px;\n        \"\n    >\n</div>",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 200,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "df37478fd3a92712",
+        "type": "inject",
+        "z": "d511ed243f196bad",
+        "name": "Start Pet Detection",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "6",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "2963ba250ee6cf0e"
+            ]
+        ]
+    },
+    {
+        "id": "2963ba250ee6cf0e",
+        "type": "exec",
+        "z": "d511ed243f196bad",
+        "command": "/usr/bin/python3 /home/broketoof/petguardian-ai/pet_detect_nodered.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Pet Detective",
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "0c00542926b51c11"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "a6913b20acc7a662",
+        "type": "json",
+        "z": "d511ed243f196bad",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 440,
+        "wires": [
+            [
+                "703becb849810ef3",
+                "d90e105edfabd8a8",
+                "e7740a309928de19",
+                "b014ef38d8f85001"
+            ]
+        ]
+    },
+    {
+        "id": "703becb849810ef3",
+        "type": "change",
+        "z": "d511ed243f196bad",
+        "name": "Pet Status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.status",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 520,
+        "wires": [
+            [
+                "2968ee06cffbc893"
+            ]
+        ]
+    },
+    {
+        "id": "d90e105edfabd8a8",
+        "type": "change",
+        "z": "d511ed243f196bad",
+        "name": "Pet Confidence",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.confidence",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 580,
+        "wires": [
+            [
+                "ea95f78d607dcd48"
+            ]
+        ]
+    },
+    {
+        "id": "2968ee06cffbc893",
+        "type": "ui-text",
+        "z": "d511ed243f196bad",
+        "group": "7be2d9effcad6721",
+        "order": 3,
+        "width": "12",
+        "height": "1",
+        "name": "Pet Status",
+        "label": "Pet Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 650,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "ea95f78d607dcd48",
+        "type": "ui-text",
+        "z": "d511ed243f196bad",
+        "group": "7be2d9effcad6721",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "name": "Pet Confidence",
+        "label": "Pet Confidence",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 660,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "63ce1a7d45296020",
+        "type": "inject",
+        "z": "d511ed243f196bad",
+        "name": "Stop Pet Detection",
+        "props": [
+            {
+                "p": "kill",
+                "v": "SIGTERM",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "2963ba250ee6cf0e"
+            ]
+        ]
+    },
+    {
+        "id": "0c00542926b51c11",
+        "type": "function",
+        "z": "d511ed243f196bad",
+        "name": "Buffer JSON Line",
+        "func": "let buffer = context.get(\"buffer\") || \"\";\n\nbuffer += msg.payload.toString();\n\nlet lines = buffer.split(/\\r?\\n/);\n\n// Save unfinished last line for the next chunk\ncontext.set(\"buffer\", lines.pop());\n\nlet messages = [];\n\nfor (let line of lines) {\n    line = line.trim();\n\n    if (line.length > 0) {\n        messages.push({\n            payload: line\n        });\n    }\n}\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 320,
+        "wires": [
+            [
+                "a6913b20acc7a662"
+            ]
+        ]
+    },
+    {
+        "id": "e7740a309928de19",
+        "type": "function",
+        "z": "d511ed243f196bad",
+        "name": "Last Seen",
+        "func": "let lastSeen = flow.get(\"lastSeen\");\n\nif (msg.payload.pet === \"dog\" || msg.payload.pet === \"cat\") {\n    lastSeen = new Date().toLocaleTimeString(\"en-US\", {\n        hour: \"numeric\",\n        minute: \"2-digit\",\n        second: \"2-digit\"\n    });\n\n    flow.set(\"lastSeen\", lastSeen);\n}\n\nmsg.payload = lastSeen || \"No pet detected yet\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 660,
+        "wires": [
+            [
+                "a15d677952016ff3"
+            ]
+        ]
+    },
+    {
+        "id": "a15d677952016ff3",
+        "type": "ui-text",
+        "z": "d511ed243f196bad",
+        "group": "7be2d9effcad6721",
+        "order": 2,
+        "width": "12",
+        "height": "1",
+        "name": "Last Seen",
+        "label": "Last Seen",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 640,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "b014ef38d8f85001",
+        "type": "function",
+        "z": "d511ed243f196bad",
+        "name": "Persist Pet Sighting",
+        "func": "const pet = msg.payload.pet;\n\nif (pet !== \"dog\" && pet !== \"cat\") {\n    return null;\n}\n\nconst now = Date.now();\nconst lastWrite = context.get(\"lastWrite\") || 0;\n\n// Only save about once every 10 seconds\nif (now - lastWrite < 10000) {\n    return null;\n}\n\ncontext.set(\"lastWrite\", now);\n\nmsg.params = {\n    $pet: pet,\n    $confidence: msg.payload.confidence,\n    $last_seen: new Date(now).toISOString()\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 740,
+        "wires": [
+            [
+                "9090a9b436f43f17",
+                "157b95f1357d725a"
+            ]
+        ]
+    },
+    {
+        "id": "9090a9b436f43f17",
+        "type": "sqlite",
+        "z": "d511ed243f196bad",
+        "mydb": "fb023e89b0d8c979",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO pet_status (id, pet, confidence, last_seen)\nVALUES (1, $pet, $confidence, $last_seen)\nON CONFLICT(id) DO UPDATE SET\n    pet = excluded.pet,\n    confidence = excluded.confidence,\n    last_seen = excluded.last_seen;",
+        "name": "Save Pet Status",
+        "x": 640,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "157b95f1357d725a",
+        "type": "debug",
+        "z": "d511ed243f196bad",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "7552f1ac2b20cfb2",
+        "type": "inject",
+        "z": "d511ed243f196bad",
+        "name": "Restore Last Seen",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "8",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 940,
+        "wires": [
+            [
+                "893d138edbb0313c"
+            ]
+        ]
+    },
+    {
+        "id": "893d138edbb0313c",
+        "type": "function",
+        "z": "d511ed243f196bad",
+        "name": "Read Saved Last Seen",
+        "func": "msg.topic = `\nSELECT last_seen\nFROM pet_status\nWHERE id = 1\n`;\n\nmsg.payload = [];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 1000,
+        "wires": [
+            [
+                "39563e0994a2d689"
+            ]
+        ]
+    },
+    {
+        "id": "39563e0994a2d689",
+        "type": "sqlite",
+        "z": "d511ed243f196bad",
+        "mydb": "fb023e89b0d8c979",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "Get Last Seen for Restore",
+        "x": 530,
+        "y": 1060,
+        "wires": [
+            [
+                "fd2dd00dc7eb8407"
+            ]
+        ]
+    },
+    {
+        "id": "fd2dd00dc7eb8407",
+        "type": "function",
+        "z": "d511ed243f196bad",
+        "name": "Restore Last Seen Value",
+        "func": "const rows = msg.payload;\n\nif (rows && rows.length > 0 && rows[0].last_seen) {\n    const date = new Date(rows[0].last_seen);\n\n    const lastSeen = date.toLocaleTimeString(\"en-US\", {\n        hour: \"numeric\",\n        minute: \"2-digit\",\n        second: \"2-digit\"\n    });\n\n    flow.set(\"lastSeen\", lastSeen);\n    msg.payload = lastSeen;\n} else {\n    msg.payload = \"No pet detected yet\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 840,
+        "wires": [
+            [
+                "a15d677952016ff3"
+            ]
+        ]
+    },
+    {
+        "id": "4b4d0555981135ca",
+        "type": "inject",
+        "z": "ae801eedb6f1ce65",
+        "name": "Initialize Pet DB",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 340,
+        "wires": [
+            [
+                "5893e79d9256c42c"
+            ]
+        ]
+    },
+    {
+        "id": "5893e79d9256c42c",
+        "type": "function",
+        "z": "ae801eedb6f1ce65",
+        "name": "Create Pet Status Table",
+        "func": "msg.topic = `\nCREATE TABLE IF NOT EXISTS pet_status (\n    id INTEGER PRIMARY KEY,\n    pet TEXT,\n    confidence REAL,\n    last_seen TEXT\n)\n`;\n\nmsg.payload = [];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 420,
+        "wires": [
+            [
+                "fa89365dfeb5c171"
+            ]
+        ]
+    },
+    {
+        "id": "fa89365dfeb5c171",
+        "type": "sqlite",
+        "z": "ae801eedb6f1ce65",
+        "mydb": "fb023e89b0d8c979",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "Pet Guardian DB",
+        "x": 470,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "28e451c9c10af9e2",
+        "type": "debug",
+        "z": "ae801eedb6f1ce65",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "7339032ff3a25b9a",
+        "type": "function",
+        "z": "ae801eedb6f1ce65",
+        "name": "Read Pet Status",
+        "func": "msg.topic = `\nSELECT id, pet, confidence, last_seen\nFROM pet_status\nWHERE id = 1\n`;\n\nmsg.payload = [];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 700,
+        "wires": [
+            [
+                "cb4f823bbd5bcf0c"
+            ]
+        ]
+    },
+    {
+        "id": "f619f78e57f4d0f2",
+        "type": "inject",
+        "z": "ae801eedb6f1ce65",
+        "name": "Check Pet Status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 620,
+        "wires": [
+            [
+                "7339032ff3a25b9a"
+            ]
+        ]
+    },
+    {
+        "id": "cb4f823bbd5bcf0c",
+        "type": "sqlite",
+        "z": "ae801eedb6f1ce65",
+        "mydb": "fb023e89b0d8c979",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "Read",
+        "x": 490,
+        "y": 700,
+        "wires": [
+            [
+                "28e451c9c10af9e2"
+            ]
+        ]
+    },
+    {
+        "id": "6fd751552624b15d",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.33.0",
+            "node-red-node-sqlite": "2.0.1",
+            "node-red-contrib-bme280": "1.1.0"
+        }
+    }
+]

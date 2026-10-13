@@ -1,0 +1,83 @@
+import cv2
+import json
+import time
+from pathlib import Path
+
+STREAM_URL = "http://127.0.0.1:8000/stream.mjpg"
+
+BASE = Path.home() / "petguardian-ai" / "MobileNet-SSD"
+PROTOTXT = str(BASE / "deploy.prototxt")
+MODEL = str(BASE / "mobilenet_iter_73000.caffemodel")
+
+CLASSES = [
+    "background",
+    "aeroplane", "bicycle", "bird", "boat",
+    "bottle", "bus", "car", "cat", "chair",
+    "cow", "diningtable", "dog", "horse",
+    "motorbike", "person", "pottedplant",
+    "sheep", "sofa", "train", "tvmonitor"
+]
+
+CONFIDENCE_THRESHOLD = 0.50
+
+net = cv2.dnn.readNetFromCaffe(PROTOTXT, MODEL)
+cap = cv2.VideoCapture(STREAM_URL)
+
+if not cap.isOpened():
+    raise RuntimeError("Could not open Pet Guardian camera stream")
+
+last_output = 0
+
+try:
+    while True:
+        ret, frame = cap.read()
+
+        if not ret:
+            time.sleep(0.5)
+            continue
+
+        blob = cv2.dnn.blobFromImage(
+            cv2.resize(frame, (300, 300)),
+            0.007843,
+            (300, 300),
+            127.5
+        )
+
+        net.setInput(blob)
+        detections = net.forward()
+
+        best_pet = None
+        best_confidence = 0
+
+        for i in range(detections.shape[2]):
+            confidence = float(detections[0, 0, i, 2])
+
+            if confidence < CONFIDENCE_THRESHOLD:
+                continue
+
+            class_id = int(detections[0, 0, i, 1])
+            label = CLASSES[class_id]
+
+            if label in ("cat", "dog") and confidence > best_confidence:
+                best_pet = label
+                best_confidence = confidence
+
+        if time.time() - last_output >= 1:
+            if best_pet:
+                output = {
+                    "status": f"{best_pet.title()} Detected",
+                    "pet": best_pet,
+                    "confidence": round(best_confidence * 100, 1)
+                }
+            else:
+                output = {
+                    "status": "No Pet Detected",
+                    "pet": None,
+                    "confidence": 0
+                }
+
+            print(json.dumps(output), flush=True)
+            last_output = time.time()
+
+finally:
+    cap.release()
